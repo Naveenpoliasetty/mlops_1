@@ -2,8 +2,6 @@ import os
 from pathlib import Path
 import logging
 
-
-
 list_of_files = [
 
     ".github/workflows",
@@ -34,6 +32,7 @@ list_of_files = [
 for filepath in list_of_files:
     filepath = Path(filepath)
     filedir, filename = os.path.split(filepath)
+    print(filedir,'\n',filename)
     
     if filedir!= "":
         os.makedirs(filedir, exist_ok=True)
@@ -43,5 +42,3 @@ for filepath in list_of_files:
     if not filepath.exists() or filepath.stat().st_size == 0:
         with filepath.open('w') as f:
             pass  # create an empty file
-
-
