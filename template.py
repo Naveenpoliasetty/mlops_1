@@ -4,7 +4,7 @@ import logging
 
 list_of_files = [
 
-    ".github/workflows",
+    ".github/workflows/.gitkeep",
     "src/__init__.py",
     "src/components/__init__.py",
     "src/components/data_ingestion.py",
@@ -16,7 +16,7 @@ list_of_files = [
     "src/pipeline/prediction_pipeline.py",
     "src/utils/utils.py",
     "src/logger/logging.py",
-    "src/exceptions/expection"
+    "src/exceptions/expection",
     "tests/unit/__init__.py",
     "tests/integration/__init__.py",
     "init__setup.sh",
@@ -30,20 +30,13 @@ list_of_files = [
 ]
 
 for filepath in list_of_files:
-    file = None
     filepath = Path(filepath)
     filedir, filename = os.path.split(filepath)
-    print(filedir,'\n',filename)
     
     if filedir!= "":
         os.makedirs(filedir, exist_ok=True)
         logging.info(f"Creating directory: {filedir} for file: {filename}")
-    
-    # Check if the file exists and is not empty
-    if not filepath.exists() or filepath.stat().st_size == 0:
+
+    if not filepath.exists() or (os.path.getsize(filepath) == 0):
         with filepath.open('w') as f:
             pass  # create an empty file
-
-
-
-
